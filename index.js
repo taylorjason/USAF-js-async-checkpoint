@@ -2,22 +2,28 @@ const fetch = require('node-fetch');
 let fs = require('fs');
 
 const input = 'input.txt'
-const input1 = 'input1.txt'
+const input1 = 'input2.txt'
 
 //I: a pokemon name
 //O: space separted list of types of pokemon
 //C: use pokeapi.co
-//E: Edge cases. Input file doesn't exist. Empty lines. Capitalization of pokemon name
+//E: Edge cases?? N/A?
 
 //creat a function to read in list of pokemon and call api on each pokemon
 
 let getPokemonList = (file) => {
-  let data = fs.readFileSync(file);
-  let pokemonList = data.toString().split('\n');
-  for (let idx in pokemonList) {
-      if (pokemonList[idx] != '') {
-        getPokemonTypes(pokemonList[idx].toLowerCase())
-      }
+  try {
+        let data = fs.readFileSync(file);
+        let pokemonList = data.toString().split('\n');
+        for (let idx in pokemonList) {
+        if (pokemonList[idx] != '') {
+            getPokemonTypes(pokemonList[idx].toLowerCase())
+        }
+        }
+    }
+  catch (err) {
+    console.log('File',file,'does not exist\n');
+    return;
   }
 }
 
